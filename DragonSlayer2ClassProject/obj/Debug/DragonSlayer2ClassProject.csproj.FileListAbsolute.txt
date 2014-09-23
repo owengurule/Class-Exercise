@@ -1,0 +1,8 @@
+C:\Users\Technologist\Documents\GITHUB\Class-Exercise\DragonSlayer2ClassProject\bin\Debug\DragonSlayer2ClassProject.exe.config
+C:\Users\Technologist\Documents\GITHUB\Class-Exercise\DragonSlayer2ClassProject\obj\Debug\DragonSlayer2ClassProject.csprojResolveAssemblyReference.cache
+C:\Users\Technologist\Documents\GITHUB\Class-Exercise\DragonSlayer2ClassProject\bin\Debug\DragonSlayer2ClassProject.exe
+C:\Users\Technologist\Documents\GITHUB\Class-Exercise\DragonSlayer2ClassProject\bin\Debug\DragonSlayer2ClassProject.pdb
+C:\Users\Technologist\Documents\GITHUB\Class-Exercise\DragonSlayer2ClassProject\bin\Debug\EntityFramework.dll
+C:\Users\Technologist\Documents\GITHUB\Class-Exercise\DragonSlayer2ClassProject\bin\Debug\EntityFramework.xml
+C:\Users\Technologist\Documents\GITHUB\Class-Exercise\DragonSlayer2ClassProject\obj\Debug\DragonSlayer2ClassProject.exe
+C:\Users\Technologist\Documents\GITHUB\Class-Exercise\DragonSlayer2ClassProject\obj\Debug\DragonSlayer2ClassProject.pdb

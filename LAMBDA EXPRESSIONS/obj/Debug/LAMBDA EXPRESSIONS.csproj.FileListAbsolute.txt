@@ -1,0 +1,6 @@
+C:\Users\Technologist\Documents\GITHUB\Class-Exercise\LAMBDA EXPRESSIONS\bin\Debug\LAMBDA EXPRESSIONS.exe.config
+C:\Users\Technologist\Documents\GITHUB\Class-Exercise\LAMBDA EXPRESSIONS\bin\Debug\LAMBDA EXPRESSIONS.exe
+C:\Users\Technologist\Documents\GITHUB\Class-Exercise\LAMBDA EXPRESSIONS\bin\Debug\LAMBDA EXPRESSIONS.pdb
+C:\Users\Technologist\Documents\GITHUB\Class-Exercise\LAMBDA EXPRESSIONS\obj\Debug\LAMBDA EXPRESSIONS.csprojResolveAssemblyReference.cache
+C:\Users\Technologist\Documents\GITHUB\Class-Exercise\LAMBDA EXPRESSIONS\obj\Debug\LAMBDA EXPRESSIONS.exe
+C:\Users\Technologist\Documents\GITHUB\Class-Exercise\LAMBDA EXPRESSIONS\obj\Debug\LAMBDA EXPRESSIONS.pdb
