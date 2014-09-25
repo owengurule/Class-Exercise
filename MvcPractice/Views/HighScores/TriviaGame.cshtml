@@ -1,0 +1,16 @@
+﻿@model IEnumerable<MvcPractice.Models.HighScore>
+@{
+    ViewBag.Title = "Trivia";
+}
+<ol>
+    @foreach (var item in Model)
+    {
+        
+        <li>
+            @item.Name - @item.Score - @item.DateCreated.Value.ToShortDateString();
+        </li>
+        
+    }
+</ol>
+
+<h2>TriviaGame</h2>
