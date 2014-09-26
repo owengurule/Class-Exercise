@@ -13,15 +13,27 @@
     </header>
     <nav>
         <a href="@Url.Action("Index", "Home")">
-            BHOme
+            Home
         </a>
         &nbsp; | &nbsp;
         <a href="@Url.Action("About", "Home")">
-            aBHOut
+            about
         </a>
+                &nbsp; | &nbsp;
         <a href="@Url.Action("Index", "HighScores")">
             Game High Scores
         </a>
+                &nbsp; | &nbsp;
+        <a href="@Url.Action("Index", "Contact")">
+            Contact
+
+        </a>
+                &nbsp; | &nbsp;
+        <a href="@Url.Action("Index", "Admin")">
+            Admin
+
+        </a>
+
     </nav>
     @RenderBody()
 

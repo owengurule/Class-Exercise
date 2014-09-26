@@ -1,0 +1,16 @@
+﻿@models october25th2014.Models.BloodBanks
+
+
+@{
+    ViewBag.Title = "Edit BloodBank";
+}
+
+<h2>EditBloodBank</h2>
+<form action="@Url.Action("Edit", "Donors")">
+    <span>
+        @Html.HiddenFor(x=> x.DonorID)
+    </span>
+
+
+
+</form>
