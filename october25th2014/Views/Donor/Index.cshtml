@@ -1,0 +1,21 @@
+﻿@model IEnumerable<october25th2014.Models.Donor>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    
+    @foreach (var item in Model)
+    {
+        <p>
+            @item.Name - @item.BloodType
+            <a href="@Url.Action("Details", "Donor")">
+                Details
+            </a>
+        </p>
+
+    }
+
+</div>
