@@ -48,13 +48,13 @@
     <End Role="Posts" Type="Model.Store.Posts" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="Comments" Type="Model.Store.Comments" Multiplicity="0..1" />
+    <End Role="Comments" Type="Model.Store.Comments" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Posts">
         <PropertyRef Name="PostID" />
       </Principal>
       <Dependent Role="Comments">
-        <PropertyRef Name="CommentID" />
+        <PropertyRef Name="PostID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

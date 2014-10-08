@@ -14,6 +14,11 @@ namespace MyBlog.Models
     
     public partial class Post
     {
+        public Post()
+        {
+            this.Comments = new HashSet<Comment>();
+        }
+    
         public int PostID { get; set; }
         public string Body { get; set; }
         public Nullable<System.DateTime> DateCreate { get; set; }
@@ -23,6 +28,6 @@ namespace MyBlog.Models
         public int AuthorID { get; set; }
     
         public virtual Author Author { get; set; }
-        public virtual Comment Comment { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

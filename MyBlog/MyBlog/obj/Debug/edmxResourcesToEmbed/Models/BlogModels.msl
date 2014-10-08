@@ -11,17 +11,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Comments">
-      <EntityTypeMapping TypeName="Model.Comment">
-        <MappingFragment StoreEntitySet="Comments">
-          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="PostID" ColumnName="PostID" />
-          <ScalarProperty Name="Body" ColumnName="Body" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Posts">
       <EntityTypeMapping TypeName="Model.Post">
         <MappingFragment StoreEntitySet="Posts">
@@ -32,6 +21,17 @@
           <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
           <ScalarProperty Name="Likes" ColumnName="Likes" />
           <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="Model.Comment">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

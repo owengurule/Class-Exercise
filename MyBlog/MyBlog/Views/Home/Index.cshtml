@@ -1,5 +1,77 @@
-﻿@{
+﻿@model IEnumerable<MyBlog.Models.Post>
+
+@{
     ViewBag.Title = "Index";
 }
 
+@foreach (var item in Model)
+{
+    
+
 <h2>Index</h2>
+
+<section class="post">
+	<div class="postInfo">
+		<img class="thumb" src="@item.Author.ImageURL" />
+		<span>@item.Title</span><br />
+		<small>By <a href="/author/AuthorName">@item.Author.Name</a>@item.DateCreate.GetValueOrDefault().ToShortDateString()</small>
+	</div>
+	<div class="postContent">   
+		
+		<img src="@item.ImageURL" />
+		
+		@item.Body
+
+	</div>
+	<div>
+		
+		<span class="like" data-postId="postId">
+			@item.Likes <span>Likes</span>
+		</span> 
+		
+	</div>
+    
+    
+	<div class="comments">
+		<span class="showComments">
+		<span>Show</span> @item.Comments.Count() comments
+		</span>
+	
+      
+  
+		<div class="commentsDiv">
+				@foreach (var comment in item.Comments)
+  {
+			 <div class="comment">
+				<span>
+					Date Commented
+				</span>
+				<br />
+				<div>Comment Body</div>
+			
+			</div>
+            }
+			 <div class="comment">
+				<span>Commenter name wrote on 
+					Date Commented
+				</span>
+				<br />
+				<div>Comment Body</div>
+			</div>
+			
+			<form action="@Url.Action("AddComment", "Home") method=post ">
+				<label for="author">Your Name</label>
+				<input type="text" name="author" class="commentAuthor" />
+				<br />
+				<label for="Body">Comment</label>
+				<textarea name="body" class="commentBody"></textarea>
+				<br />
+                @*hidden field to hold the postid for the comment*@
+                <input type="hidden" name="PostID" value="@item.PostID"
+				<input type="submit" value="Add Comment" />
+			</form>
+		</div>
+        
+</section>
+    
+}

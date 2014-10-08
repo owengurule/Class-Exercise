@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Authors" EntityType="Model.Store.Authors" store:Type="Tables" Schema="spOwen" />
           <EntitySet Name="Comments" EntityType="Model.Store.Comments" store:Type="Tables" Schema="spOwen" />
@@ -53,13 +53,13 @@
           <End Role="Posts" Type="Model.Store.Posts" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Comments" Type="Model.Store.Comments" Multiplicity="0..1" />
+          <End Role="Comments" Type="Model.Store.Comments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Posts">
               <PropertyRef Name="PostID" />
             </Principal>
             <Dependent Role="Comments">
-              <PropertyRef Name="CommentID" />
+              <PropertyRef Name="PostID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -77,22 +77,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="BlogEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Authors" EntityType="Model.Author" />
-          <EntitySet Name="Comments" EntityType="Model.Comment" />
           <EntitySet Name="Posts" EntityType="Model.Post" />
           <AssociationSet Name="FK_Posts_Authors" Association="Model.FK_Posts_Authors">
             <End Role="Authors" EntitySet="Authors" />
             <End Role="Posts" EntitySet="Posts" />
           </AssociationSet>
+          <EntitySet Name="Comments" EntityType="Model.Comment" />
           <AssociationSet Name="FK_Comments_Posts" Association="Model.FK_Comments_Posts">
-            <End Role="Posts" EntitySet="Posts" />
-            <End Role="Comments" EntitySet="Comments" />
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Comment" EntitySet="Comments" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Author">
@@ -104,17 +103,6 @@
           <Property Name="ImageURL" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
           <Property Name="Username" Type="String" MaxLength="400" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Posts" Relationship="Model.FK_Posts_Authors" FromRole="Authors" ToRole="Posts" />
-        </EntityType>
-        <EntityType Name="Comment">
-          <Key>
-            <PropertyRef Name="CommentID" />
-          </Key>
-          <Property Name="CommentID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="400" Unicode="true" FixedLength="false" />
-          <Property Name="PostID" Type="Int32" Nullable="false" />
-          <Property Name="Body" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="DateCreated" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Post" Relationship="Model.FK_Comments_Posts" FromRole="Comments" ToRole="Posts" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
@@ -128,7 +116,7 @@
           <Property Name="Likes" Type="Int32" />
           <Property Name="AuthorID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Author" Relationship="Model.FK_Posts_Authors" FromRole="Posts" ToRole="Authors" />
-          <NavigationProperty Name="Comment" Relationship="Model.FK_Comments_Posts" FromRole="Posts" ToRole="Comments" />
+          <NavigationProperty Name="Comments" Relationship="Model.FK_Comments_Posts" FromRole="Post" ToRole="Comment" />
         </EntityType>
         <Association Name="FK_Posts_Authors">
           <End Role="Authors" Type="Model.Author" Multiplicity="1">
@@ -144,17 +132,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Type="Int32" Name="CommentID" Nullable="false" />
+          <Property Type="String" Name="Name" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="PostID" Nullable="false" />
+          <Property Type="String" Name="Body" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="DateCreated" Precision="3" />
+          <NavigationProperty Name="Post" Relationship="Model.FK_Comments_Posts" FromRole="Comment" ToRole="Post" />
+        </EntityType>
         <Association Name="FK_Comments_Posts">
-          <End Role="Posts" Type="Model.Post" Multiplicity="1">
+          <End Type="Model.Post" Role="Post" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Comments" Type="Model.Comment" Multiplicity="0..1" />
+          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Posts">
+            <Principal Role="Post">
               <PropertyRef Name="PostID" />
             </Principal>
-            <Dependent Role="Comments">
-              <PropertyRef Name="CommentID" />
+            <Dependent Role="Comment">
+              <PropertyRef Name="PostID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -174,17 +173,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Comments">
-            <EntityTypeMapping TypeName="Model.Comment">
-              <MappingFragment StoreEntitySet="Comments">
-                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="PostID" ColumnName="PostID" />
-                <ScalarProperty Name="Body" ColumnName="Body" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Posts">
             <EntityTypeMapping TypeName="Model.Post">
               <MappingFragment StoreEntitySet="Posts">
@@ -195,6 +183,17 @@
                 <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
                 <ScalarProperty Name="Likes" ColumnName="Likes" />
                 <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="Model.Comment">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

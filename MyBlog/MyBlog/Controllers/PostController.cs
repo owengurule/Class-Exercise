@@ -18,7 +18,7 @@ namespace MyBlog.Controllers
 
         public ActionResult Index()
         {
-            var posts = db.Posts.Include(p => p.Author).Include(p => p.Comment);
+            var posts = db.Posts.Include(p => p.Author).Include(p => p.Comments);
             return View(posts.ToList());
         }
 
@@ -50,7 +50,7 @@ namespace MyBlog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Post post)
+        public ActionResult Create(Post post, HttpPostedFileBase ImageURL)
         {
             if (ModelState.IsValid)
             {
@@ -84,10 +84,11 @@ namespace MyBlog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Post post)
+        public ActionResult Edit(Post post, HttpPostedFileBase ImageURL)
         {
             if (ModelState.IsValid)
             {
+
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
