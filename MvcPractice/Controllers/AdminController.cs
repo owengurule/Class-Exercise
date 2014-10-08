@@ -59,7 +59,7 @@ namespace MvcPractice.Controllers
             return RedirectToAction("Index", "Admin");
         }
 
-
+    
 
     }
 }

@@ -24,7 +24,7 @@ namespace MvcPractice.Controllers
             //add our contact info to the database.
             db.ContactForms.Add(contactForm);
             //save the changes
-            db.SaveChanges();
+            db.SaveChanges();   
             //kickk the user to the thankyou page
             return RedirectToAction("ThankYou", "Contact");
         }

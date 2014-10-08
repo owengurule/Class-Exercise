@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace october25th2014.Controllers
 {
-    public class BloodBankController : Controller
+    public class Donor : Controller
     {
         //make a connection to the database
         Models.BloodBankEntities db = new Models.BloodBankEntities();
@@ -16,14 +16,18 @@ namespace october25th2014.Controllers
 
         public ActionResult Index()
         {
-            return View(db.BloodBanks);
+            return View(db.Donors);
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View.(db.BloodBanks.Find(id));
+            return View(db.Donors.Find(id));
         }
 
+        public ActionResult Details(int id)
+        {
+            return View(db.Donors.Find(id));
+        }
     }
 }
